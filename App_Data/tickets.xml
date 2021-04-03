@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tickets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="tickets.xsd">
+<supportTicket xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="supportTicket.xsd">
 
-    <ticket id="5123">
-        <issueDateTime>2020-01-21T06:15:40</issueDateTime>
-        <status>In Progress</status>
-        <priority>High</priority>
-        <creatorId>1233</creatorId>        
-        <subject>Can not connect to VPN</subject>
-        <description>
-            When try to connect to the VPN, get server error
-        </description>
-    </ticket>
-    <ticket id="123">
-        <issueDateTime>2020-01-21T06:15:40</issueDateTime>
-        <status>Solved</status>
-        <priority>Low</priority>
-        <creatorId>145</creatorId>       
-        <subject>Can not connect to the new printer</subject>
-        <description>
-            When search for new printer nothing shows up
-        </description>
+	<ticket id="5123">
+		<issueDateTime>2020-01-21T06:15:40</issueDateTime>
+		<status>In Progress</status>
+		<priority>High</priority>
+		<creatorId>1233</creatorId>
+		<subject>Can not connect to VPN</subject>
+		<description>
+			When try to connect to the VPN, get server error
+		</description>
+		<messages>
+			<message>
+				<writerId>4567</writerId>
+				<dateTime>2020-01-21T06:15:40</dateTime>
+				<text>Scheduled a call</text>
+			</message>
+			<message>
+				<writerId>145</writerId>
+				<dateTime>2020-01-26T09:15:40</dateTime>
+				<text>Scheduled a call</text>
+			</message>
+		</messages>
+	</ticket>
+	<ticket id="123">
+		<issueDateTime>2020-01-21T06:15:40</issueDateTime>
+		<status>Solved</status>
+		<priority>Low</priority>
+		<creatorId>145</creatorId>
+		<subject>Can not connect to the new printer</subject>
+		<description>
+			When search for new printer nothing shows up
+		</description>
+		<messages>
+			<message>
+				<writerId>4567</writerId>
+				<dateTime>2020-01-21T06:15:40</dateTime>
+				<text>New printer has been installed</text>
+			</message>
+		</messages>
+	</ticket>
 
-    </ticket>
-</tickets>
+</supportTicket>
