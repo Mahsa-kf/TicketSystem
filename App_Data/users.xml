@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="users.xsd">
+    <user id="4567">
+        <userName> MahsaKf</userName>
+        <password>111111</password>       
+        <firstName>Mahsa</firstName>
+        <lastName>KarimiFard</lastName>
+        <type>Support Staff</type>
+        <emailAddress>mahsa-kf@yahoo.com</emailAddress>
+        <contactNumber>6471234567</contactNumber>         
+    </user>
+    <user id="145">
+        <userName>MonaRod</userName>
+        <password>22222</password>       
+        <firstName>Mona</firstName>
+        <lastName>Rod</lastName>
+        <type>Client</type>
+        <emailAddress>Mona-rr@yahoo.com</emailAddress>
+        <contactNumber>6475534567</contactNumber>           
+    </user>
+    <user id="1233">
+        <userName> JoeJj</userName>
+        <password>333333</password>       
+        <firstName>Joe</firstName>
+        <middleName>Walker</middleName>
+        <lastName>Jones</lastName>
+        <type>Client</type>
+        <emailAddress>Joe-jj@yahoo.com</emailAddress>
+        <contactNumber>64712345699</contactNumber>          
+    </user>
+</users>

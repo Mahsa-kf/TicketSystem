@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tickets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="tickets.xsd">
+
+    <ticket id="5123">
+        <issueDateTime>2020-01-21T06:15:40</issueDateTime>
+        <status>In Progress</status>
+        <priority>High</priority>
+        <creatorId>1233</creatorId>        
+        <subject>Can not connect to VPN</subject>
+        <description>
+            When try to connect to the VPN, get server error
+        </description>
+    </ticket>
+    <ticket id="123">
+        <issueDateTime>2020-01-21T06:15:40</issueDateTime>
+        <status>Solved</status>
+        <priority>Low</priority>
+        <creatorId>145</creatorId>       
+        <subject>Can not connect to the new printer</subject>
+        <description>
+            When search for new printer nothing shows up
+        </description>
+
+    </ticket>
+</tickets>
