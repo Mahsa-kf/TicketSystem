@@ -21,6 +21,8 @@ namespace TicketSystem.Controllers
         public IActionResult Create()
         {
             var ticket = new Models.Ticket();
+            var message = new Models.Message();
+            ticket.Messages = new List<Message>() { message };
             return View(ticket);
         }
 
@@ -145,24 +147,31 @@ namespace TicketSystem.Controllers
 
 
             XmlNode messagesXmlElement = doc.CreateElement("messages");
-            XmlNode messageXmlElement = doc.CreateElement("message");
+
+            if (userInput.Messages != null && userInput.Messages.Count > 0)
+            {
+                foreach (Message message in userInput.Messages)
+                {
+                    XmlNode messageXmlElement = doc.CreateElement("message");
 
 
-            XmlNode writerIdXmlElement = doc.CreateElement("writerId");
-            writerIdXmlElement.InnerText = userInput.Messages.FirstOrDefault().WriterId.ToString();
-            messageXmlElement.AppendChild(writerIdXmlElement);
-           
-            XmlNode dateTimeXmlElement = doc.CreateElement("dateTime");
-            issueDateTimeXmlElement.InnerText = userInput.Messages.FirstOrDefault().DateTime.ToString();
-            messageXmlElement.AppendChild(issueDateTimeXmlElement);
+                    XmlNode writerIdXmlElement = doc.CreateElement("writerId");
+                    writerIdXmlElement.InnerText = message.WriterId.ToString();
+                    messageXmlElement.AppendChild(writerIdXmlElement);
 
-            XmlNode textXmlElement = doc.CreateElement("text");
-            textXmlElement.InnerText = userInput.Messages.FirstOrDefault().Text.ToString();
-            messageXmlElement.AppendChild(textXmlElement);
+                    XmlNode dateTimeXmlElement = doc.CreateElement("dateTime");
+                    issueDateTimeXmlElement.InnerText = message.DateTime.ToString();
+                    messageXmlElement.AppendChild(issueDateTimeXmlElement);
 
-            messagesXmlElement.AppendChild(messageXmlElement);
+                    XmlNode textXmlElement = doc.CreateElement("text");
+                    textXmlElement.InnerText = message.Text.ToString();
+                    messageXmlElement.AppendChild(textXmlElement);
 
-           ticketXmlElement.AppendChild(messagesXmlElement);
+                    messagesXmlElement.AppendChild(messageXmlElement);
+                }
+            }
+
+            ticketXmlElement.AppendChild(messagesXmlElement);
 
             return ticketXmlElement;
         }
