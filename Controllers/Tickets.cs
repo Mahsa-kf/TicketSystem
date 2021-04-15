@@ -17,48 +17,48 @@ namespace TicketSystem.Controllers
             return View(ticketList);
         }
 
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    var book = new Models.Ticket();
-        //    return View(book);
-        //}
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var ticket = new Models.Ticket();
+            return View(ticket);
+        }
 
-        //[HttpPost]
-        //public IActionResult Create(Models.Ticket t)
-        //{
-        //    //load tickets.xml
-        //    string path = Request.PathBase + "App_Data/tickets.xml";
-        //    XmlDocument doc = new XmlDocument();
+        [HttpPost]
+        public IActionResult Create(Models.Ticket t)
+        {
+            //load tickets.xml
+            string path = Request.PathBase + "App_Data/tickets.xml";
+            XmlDocument doc = new XmlDocument();
 
-        //    if (System.IO.File.Exists(path))
-        //    {
-        //        //if file exists, just load it and create new ticket
-        //        doc.Load(path);
+            if (System.IO.File.Exists(path))
+            {
+                //if file exists, just load it and create new ticket
+                doc.Load(path);
 
-        //        //create a new ticket
-        //        XmlElement ticketXmlElement = _CreateTicketElement(doc, t);
+                //create a new ticket
+                XmlElement ticketXmlElement = _CreateTicketElement(doc, t);
 
-        //        // get the root element
-        //        doc.DocumentElement.AppendChild(ticketXmlElement);
+                // get the root element
+                doc.DocumentElement.AppendChild(ticketXmlElement);
 
-        //    }
-        //    else
-        //    {
-        //        //file doesn't exist, so create and create new ticket
-        //        XmlNode dec = doc.CreateXmlDeclaration("1.0", "utf-8", "");
-        //        doc.AppendChild(dec);
-        //        XmlNode root = doc.CreateElement("tickets");
+            }
+            else
+            {
+                //file doesn't exist, so create and create new ticket
+                XmlNode dec = doc.CreateXmlDeclaration("1.0", "utf-8", "");
+                doc.AppendChild(dec);
+                XmlNode root = doc.CreateElement("tickets");
 
-        //        //create a new ticket
-        //        XmlElement ticketXmlElement = _CreateTicketElement(doc, t);
-        //        root.AppendChild(ticketXmlElement);
-        //        doc.AppendChild(root);
-        //    }
-        //    doc.Save(path);
+                //create a new ticket
+                XmlElement ticketXmlElement = _CreateTicketElement(doc, t);
+                root.AppendChild(ticketXmlElement);
+                doc.AppendChild(root);
+            }
+            doc.Save(path);
 
-        //    return View();
-        //}
+            return View();
+        }
 
 
         private IList<Ticket> GetTickets()
@@ -107,50 +107,73 @@ namespace TicketSystem.Controllers
         }
 
 
-        //private XmlElement _CreateBooxElement(XmlDocument doc, Models.Book userInput)
-        //{
-        //    XmlElement bookXmlElement = doc.CreateElement("book");
+        private XmlElement _CreateTicketElement(XmlDocument doc, Models.Ticket userInput)
+        {
+            XmlElement ticketXmlElement = doc.CreateElement("ticket");
 
-        //    XmlNode idXmlElement = doc.CreateElement("id");
-        //    idXmlElement.InnerText = GetNewBookID().ToString();
-        //    bookXmlElement.AppendChild(idXmlElement);
+            XmlAttribute idAttribute = doc.CreateAttribute("id");
+            idAttribute.Value = GetNewTicketID().ToString();
+            ticketXmlElement.Attributes.Append(idAttribute);
 
-        //    XmlNode titleXmlElement = doc.CreateElement("title");
-        //    titleXmlElement.InnerText = userInput.Title;
-        //    bookXmlElement.AppendChild(titleXmlElement);
 
-        //    XmlNode authorXmlElement = doc.CreateElement("author");
+            XmlNode issueDateTimeXmlElement = doc.CreateElement("issueDateTime");
+            issueDateTimeXmlElement.InnerText = userInput.IssueDateTime.ToString();
+            ticketXmlElement.AppendChild(issueDateTimeXmlElement);
 
-        //    XmlAttribute titleAttribute = doc.CreateAttribute("title");
-        //    titleAttribute.Value = userInput.Author.Title;
-        //    authorXmlElement.Attributes.Append(titleAttribute);
+            XmlNode statusXmlElement = doc.CreateElement("status");
+            statusXmlElement.InnerText = userInput.Status.ToString();
+            ticketXmlElement.AppendChild(statusXmlElement);
 
-        //    XmlNode firstNameXmlElement = doc.CreateElement("firstname");
-        //    firstNameXmlElement.InnerText = userInput.Author.FirstName;
-        //    authorXmlElement.AppendChild(firstNameXmlElement);
 
-        //    XmlNode middleNameXmlElement = doc.CreateElement("middlename");
-        //    middleNameXmlElement.InnerText = userInput.Author.MiddleName;
-        //    authorXmlElement.AppendChild(middleNameXmlElement);
+            XmlNode priorityXmlElement = doc.CreateElement("priority");
+            priorityXmlElement.InnerText = userInput.Priority.ToString();
+            ticketXmlElement.AppendChild(priorityXmlElement);
 
-        //    XmlNode lastNameXmlElement = doc.CreateElement("lastname");
-        //    lastNameXmlElement.InnerText = userInput.Author.LastName;
-        //    authorXmlElement.AppendChild(lastNameXmlElement);
 
-        //    bookXmlElement.AppendChild(authorXmlElement);
+            XmlNode creatorIdXmlElement = doc.CreateElement("creatorId");
+            creatorIdXmlElement.InnerText = userInput.CreatorId.ToString();
+            ticketXmlElement.AppendChild(creatorIdXmlElement);
 
-        //    return bookXmlElement;
-        //}
 
-        //private int GetNewBookID()
-        //{
-        //    // Gett the list of the books and find the last id
-        //    IList<Models.Book> bookList = GetBooks();
-        //    var lastId = bookList.Max(bookList => bookList.Id);
-        //    return lastId + 1;
-        //}
+            XmlNode subjectXmlElement = doc.CreateElement("subject");
+            subjectXmlElement.InnerText = userInput.Subject.ToString();
+            ticketXmlElement.AppendChild(subjectXmlElement);
 
-//    }
-//}
-}
+            XmlNode descriptionXmlElement = doc.CreateElement("description");
+            descriptionXmlElement.InnerText = userInput.Description.ToString();
+            ticketXmlElement.AppendChild(descriptionXmlElement);
+
+
+            XmlNode messagesXmlElement = doc.CreateElement("messages");
+            XmlNode messageXmlElement = doc.CreateElement("message");
+
+
+            XmlNode writerIdXmlElement = doc.CreateElement("writerId");
+            writerIdXmlElement.InnerText = userInput.Messages.FirstOrDefault().WriterId.ToString();
+            messageXmlElement.AppendChild(writerIdXmlElement);
+           
+            XmlNode dateTimeXmlElement = doc.CreateElement("dateTime");
+            issueDateTimeXmlElement.InnerText = userInput.Messages.FirstOrDefault().DateTime.ToString();
+            messageXmlElement.AppendChild(issueDateTimeXmlElement);
+
+            XmlNode textXmlElement = doc.CreateElement("text");
+            textXmlElement.InnerText = userInput.Messages.FirstOrDefault().Text.ToString();
+            messageXmlElement.AppendChild(textXmlElement);
+
+            messagesXmlElement.AppendChild(messageXmlElement);
+
+           ticketXmlElement.AppendChild(messagesXmlElement);
+
+            return ticketXmlElement;
+        }
+
+        private int GetNewTicketID()
+        {
+            // Gett the list of the tickets and find the last id
+            IList<Models.Ticket> ticketList = GetTickets();
+            var lastId = ticketList.Max(ticket => ticket.Id);
+            return lastId + 1;
+        }
+
+    }
 }
